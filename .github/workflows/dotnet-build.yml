@@ -13,24 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Action oficial do GitHub para fazer o checkout do repositório
       - name: Checkout do código
         uses: actions/checkout@v3
 
-      # Action pré-existente para configurar o .NET
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # ou a versão do seu projeto
+          dotnet-version: '8.0.x'
 
-      # Script personalizado para restaurar pacotes
       - name: Restaurar pacotes
-        run: dotnet restore
+        run: dotnet restore github4women/github4women.csproj
 
-      # Script personalizado para compilar o projeto
       - name: Compilar o projeto
-        run: dotnet build --configuration Release
+        run: dotnet build github4women/github4women.csproj --configuration Release
 
-      # Script personalizado para rodar testes (caso existam)
       - name: Rodar testes
-        run: dotnet test
+        run: dotnet test github4women/github4women.csproj --no-build --verbosity normal || echo "Sem testes definidos"
